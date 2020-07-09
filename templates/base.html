@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="description" content="Free Web tutorials"/>
+    <meta name="keywords" content="HTML,CSS,XML,JavaScript"/>
+    <meta name="author" content="John Doe"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <meta name="theme-color" content="#ffffff"/>
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'staticfiles2/fonts/FuturaPT/stylesheet.css' %}"/>
+    <link rel="stylesheet" href="{% static 'staticfiles2/css/style.css' %}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    {% block link %}  {% endblock %}
+    <title>{% block title %}{% endblock %}</title>
+    <!--title your page 'about-us' example-->
+  </head>
+  <body>
+    <header class="header">
+      <div class="menu-hamburger">
+        <div class="menu-hamburger__icon">
+          <div class="icon-hamburger"><span></span><span></span><span></span><span></span></div>
+        </div>
+      </div>
+      <div class="header__content">
+        <div class="container">
+          <div class="header__top">
+            <div class="header__top-social">
+              <div class="social-list"><a class="instagram" href="#"></a><a class="facebook" href="#"></a><a class="twitter" href="#"></a><a class="youtube" href="#"></a></div>
+              <div class="sum-people">Нас уже:<span>{% block count %}401121{% endblock %}</span></div>
+            </div>
+            <div class="header__top-lang">
+              <div class="header-form">
+                  {% if request.user.is_authenticated %}
+                  <span class="open-modal">Привет! {{ request.user.username }}</span>
+                      <a href="{% url 'logout' %}"><span class="open-modal"  style="margin-top: 5px">Выйти</span></a>
+                  {% else %}
+                  <a href="{% url 'login' %}"><span class="open-modal">Привет! {{ request.user.username }}</span></a>
+                  {% endif %}
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="header__bottom">
+          <div class="container">
+            <div class="nav">
+              <ul>
+                <li class="{% block main_active %}{% endblock %}"><a href="{% url 'news' %}">Главная</a></li>
+              {% block li %} {% endblock %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="header__mobil">
+        <div class="header__mobil-inner">
+          <div class="header__top">
+            <div class="header__top-social">
+              <div class="sum-people">Нас уже:<span>401121</span></div>
+              <div class="header-form"><span class="open-modal"> Связаться с нами</span></div>
+              <div class="header-search"></div>
+              <div class="social-list"><a class="instagram" href="#"></a><a class="facebook" href="#"></a><a class="twitter" href="#"></a><a class="youtube" href="#"></a></div>
+            </div>
+            <div class="header__top-lang">
+              <div class="header-lang"><a class="ru active" href="#">Русский</a><a class="kg" href="#">Кыргызча</a></div>
+            </div>
+          </div>
+          <div class="header__bottom">
+            <div class="nav">
+              <ul>
+                <li class="active"><a href="#">Главная</a></li>
+                <li><a href="#">Новости</a></li>
+                <li><a href="#">Материалы</a></li>
+                <li><a href="#">Кто есть кто</a></li>
+                <li><a href="#">Депутаты</a></li>
+                <li><a href="#">О партии</a></li>
+                <li><a href="#">Контакты</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="modal-services-fixed" id="service">
+      <div class="modal-services">
+        <h2>Обратная связь</h2>
+        <form>
+          <div class="form-block">
+            <input type="text" placeholder="ФИО" required="required"/>
+          </div>
+          <div class="form-block">
+            <input type="text" placeholder="+996 (000) 000-000" required="required"/>
+          </div>
+          <div class="form-block">
+            <textarea placeholder="Сообщения"></textarea>
+          </div>
+          <button type="submit">Отправить</button>
+        </form>
+        <div class="close-form"><span></span></div>
+      </div>
+    </div>
+    <main class="contact">
+      <div class="crumb">
+        <div class="container">
+          <div class="crumb-content"><a href="#">Главная</a><span>{% block current_block %}Новости{% endblock %}</span></div>
+        </div>
+      </div>
+    {% block content %}{% endblock %}
+    </main>
+    <footer class="footer">
+      <div class="container">
+        <div class="navigation">
+          <div class="nav">
+            <ul>
+            </ul>
+          </div>
+        </div>
+        <div class="footer__social-icon">
+          <div class="social-list"><a class="instagram" href="#"></a><a class="facebook" href="#"></a><a class="twitter" href="#"></a><a class="youtube" href="#"></a></div>
+          <div class="footer__mobil-icon"><a class="play-market" href="#"></a><a class="app-store" href="#"></a></div>
+        </div>
+      </div>
+    </footer>
+    <script src="{% static 'staticfiles2/js/libs.js' %}"></script>
+    <script src="{% static 'staticfiles2/js/main.js' %}"></script>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Мой профиль{% endblock %}
+{% block count %}Миллионы{% endblock %}
+{% block current_block %}Редактировать профиль{% endblock %}
+{% block li %}
+    <li class="active"><a href="{% url 'user_update' user.pk %}">Редактировать профиль</a></li>
+{% endblock %}
+{% block content %}
+      <div class="container">
+        <div class="news-content">
+          <h1>Редактировать профиль</h1>
+        <form method="POST" enctype="multipart/form-data">
+        {% include 'partial/reg_form.html' with button_text="Редактировать" %}
+    </form>
+        {% if is_paginated  %}
+                {% include 'partial/pagination.html' %}
+          {% endif %}
+        </div>
+      </div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Новости{% endblock %}
+{% block count %}Миллионы{% endblock %}
+{% block current_block %}Новости{% endblock %}
+{% block news_active %}active{% endblock %}
+{% block news_active_footer %}active{% endblock %}
+{% block li %}
+    {% if request.user == new.user_id %}
+    <li class="{% block whoiswho_active %}{% endblock %}"><a href="{% url 'news_update' new.pk %}">Редактировать</a></li>
+    <li><a href="{% url 'news_delete' new.pk %}">Удалить</a></li>
+    {% endif %}
+{% endblock %}
+{% block content %}
+      <div class="container">
+        <div class="news-detail__heading">
+          <div class="date">{{ new.title }}</div>
+          <h1>{{new.title}}</h1>
+        </div>
+      </div>
+      <div class="news-detail__banner">
+      {% if new.image %}
+          <img src="{{new.image.url|default_if_none:'#'}}" alt="load img" height=200px;" style="width: 300px; margin-left: 25%"/>
+      {% else %}
+          <img src="{% static 'staticfiles2/img/jpg/no_photo.jpg' %}" alt="load img" height=200px;" style="width: 300px; margin-left: 25%"/>
+      {% endif%}
+      </div>
+      <div class="news-detail__text">
+        <div class="container">
+            <p>{{ new.description|linebreaks }}</p>
+        </div>
+      </div>
+{% endblock %}

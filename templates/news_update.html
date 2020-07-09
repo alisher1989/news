@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Новости{% endblock %}
+{% block count %}Миллионы{% endblock %}
+{% block current_block %}Добавить новости{% endblock %}
+{% block li %}
+    <li class="active"><a href="{% url 'news_update' new.pk %}">Редактировать</a></li>
+{% endblock %}
+{% block content %}
+      <div class="container">
+        <div class="news-content">
+          <h1>Добавить Новости</h1>
+        <form method="POST" enctype="multipart/form-data">
+        {% include 'partial/form.html' with button_text="Update" %}
+    </form>
+        {% if is_paginated  %}
+                {% include 'partial/pagination.html' %}
+          {% endif %}
+        </div>
+      </div>
+{% endblock %}

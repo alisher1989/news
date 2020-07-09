@@ -1,0 +1,22 @@
+<!--Пагинация-->
+<div class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?{% if query %}{{ query }}&{% endif %}page={{ page_obj.previous_page_number }}" class="page-item" ></a>
+    {% endif %}
+    {% for page in paginator.page_range %}
+        {% if page_obj.number|add:'-5' == page%}
+            <a href="?{% if query %}{{ query }}&{% endif %}page=1" class="page-item">1</a>
+        {% elif page_obj.number == page %}
+            <a class="page-item active">{{ page }}</a>
+        {% elif page > page_obj.number|add:'-5' and page < page_obj.number|add:'5' %}
+            <a href="?{% if query %}{{ query }}&{% endif %}page={{ page }}" class="page-item">{{ page }}</a>
+        {% elif page_obj.number|add:'5' == page%}
+            <a href="{% if query %}{{ query }}&{% endif %}javascript:setParam('page', '{{ paginator.page_range|length }}');" class="page-item">{{ paginator.page_range|length }}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+        <a href="?{% if query %}{{ query }}&{% endif %}page={{ page_obj.next_page_number }}" class="page-item"></a>
+    {% endif %}
+</div>
+<!--Конец-->

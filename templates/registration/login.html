@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="description" content="Free Web tutorials"/>
+    <meta name="keywords" content="HTML,CSS,XML,JavaScript"/>
+    <meta name="author" content="John Doe"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <meta name="theme-color" content="#ffffff"/>
+    <link rel="stylesheet" href="{% static 'staticfiles1/fonts/FuturaPT/stylesheet.css' %}"/>
+    <link rel="stylesheet" href="{% static 'staticfiles1/css/style.css' %}"/>
+    <title>Login</title>
+    <!--title your page 'about-us' example-->
+</head>
+<body>
+<div class="login-page">
+    <div class="login-box">
+        <div class="login-title">Войти в систему</div>
+        <form action="" method="post">{% csrf_token %}
+            <div class="form-control">
+                <label>
+                    <input type="text" id="id_username" name="username"/>
+                </label>
+            </div>
+            <div class="form-control">
+                <div class="relative">
+                    <input type="password" id="password-input" placeholder="Пароль" name="password" autocomplete="off"/>
+                    <div class="toggle-password"></div>
+                </div>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div{% if message.tags %} class="errorMsg"{% endif %} style="margin-top: 5px">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <button type="submit" style="margin-bottom: 10px;">Войти</button>
+        </form>
+        <a href="{% url 'sign_up' %}">Зарегистрироваться</a>
+    </div>
+</div>
+<script src="{% static 'staticfiles1/js/libs.js' %}"></script>
+<script src="{% static 'staticfiles1/js/main.js' %}"></script>
+</body>
+</html>

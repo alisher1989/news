@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Новости{% endblock %}
+{% block count %}Миллионы{% endblock %}
+{% block current_block %}Удалить новости{% endblock %}
+{% block li %}
+    <li class="active"><a href="{% url 'news_delete' new.pk %}">Удалить</a></li>
+{% endblock %}
+{% block content %}
+      <div class="container">
+        <h1>Вы точно хотите удалить "{{ new }}"?</h1>
+    <form method="POST" action="{% url "news_delete" new.pk %}" class="text-center" class="text-center">
+        {% csrf_token %}
+        <p><input type="submit" value="Удалить" class="btn btn-danger"></p>
+        <p><a href="{% url 'news' %}" class="btn btn-default">Отменить</a></p>
+    </form>
+      </div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Новости{% endblock %}
+{% block count %}Миллионы{% endblock %}
+{% block current_block %}Новости{% endblock %}
+{% block main_active %}active{% endblock %}
+{% block news_active_footer %}active{% endblock %}
+{% block li %}
+    <li class="{% block news_add_active %}{% endblock %}"><a href="{% url 'news_add' %}">Добавить</a></li>
+    <li><a href="{% url 'category_list' %}">Категории</a></li>
+    <li><a href="{% url 'user_list' %}">Пользователи</a></li>
+{% endblock %}
+{% block content %}
+      <div class="container">
+        <div class="news-content">
+          <h1>Новости</h1>
+          <div class="news-party__card-all">
+            {% for new in news %}
+            <div class="news-party__card">
+              <div class="news-party__card-inner">
+                <div class="news-party__card-img">
+                    {% if new.image %}
+                    <img src="{{ new.image.url }}" alt="load img"/>
+                    {% else %}
+                        <img src="{% static 'staticfiles2/img/jpg/no_photo.jpg' %}" alt="load img"/>
+                    {% endif %}
+                </div>
+                <div class="news-party__card-heading">
+                  <div class="date">{{ new.date }}</div>
+                  <h3 data-mh="height2">{{ new.title|truncatechars:40 }}</h3>
+                  <p data-mh="height1">{{ new.text|truncatechars:40 }}</p>
+                </div><a href="{% url 'news_detail' new.pk %}"></a>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+
+        {% if is_paginated  %}
+                {% include 'partial/pagination.html' %}
+          {% endif %}
+        </div>
+      </div>
+{% endblock %}

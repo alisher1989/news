@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Новости{% endblock %}
+{% block count %}Миллионы{% endblock %}
+{% block current_block %}Удалить новости{% endblock %}
+{% block content %}
+      <div class="container">
+        <h1>Вы точно хотите удалить "{{ category }}"?</h1>
+    <form method="POST" action="{% url "category_delete" category.pk %}" class="text-center" class="text-center">
+        {% csrf_token %}
+        <p><input type="submit" value="Удалить" class="btn btn-danger"></p>
+        <p><a href="{% url 'category_list' %}" class="btn btn-default">Отменить</a></p>
+    </form>
+      </div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Пользователи{% endblock %}
+{% block count %}Миллионы{% endblock %}
+{% block current_block %}Пользователи{% endblock %}
+{% block li %}
+    <li class="active"><a href="{% url 'user_list' %}">Пользователи</a></li>
+{#    <li><a href="{% url 'category_add' %}">Добавить пользователя</a></li>#}
+ {% endblock %}
+{% block content %}
+      <div class="container">
+        <div class="news-content">
+          <h1>Категории</h1>
+          <div class="news-party__card-all">
+            {% for new in user_list %}
+            <div class="news-party__card">
+              <div class="news-party__card-inner">
+                <div class="news-party__card-heading">
+{#                  <div class="date">{{ new.title|default_if_none:'' }}</div>#}
+                  <span>Имя пользователя: </span><h3 data-mh="height2">{{ new.username }}</h3>
+                </div>
+                  {% if request.user == new %}
+                  <a href="{% url 'user_delete' new.pk %}" style="color: red; margin-left: 7px;">delete</a>
+                  <a href="{% url 'user_update' new.pk %}" style="margin-left: 70px; color: #003366">edit</a>
+                  {% endif %}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+
+        {% if is_paginated  %}
+                {% include 'partial/pagination.html' %}
+          {% endif %}
+        </div>
+      </div>
+{% endblock %}

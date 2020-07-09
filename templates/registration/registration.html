@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="description" content="Free Web tutorials"/>
+    <meta name="keywords" content="HTML,CSS,XML,JavaScript"/>
+    <meta name="author" content="John Doe"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <meta name="theme-color" content="#ffffff"/>
+    <link rel="stylesheet" href="{% static 'staticfiles1/fonts/FuturaPT/stylesheet.css' %}"/>
+    <link rel="stylesheet" href="{% static 'staticfiles1/css/style.css' %}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Зарегистрироваться</title>
+    <!--title your page 'about-us' example-->
+</head>
+<body>
+<div class="login-page">
+    <div class="login-box">
+        <div class="login-title">Зарегистрироваться</div>
+        <form method="post">{% csrf_token %}
+            {% include 'partial/reg_form.html' with button_text="Зарегистрироваться" %}
+        </form>
+    </div>
+</div>
+<script src="{% static 'staticfiles1/js/libs.js' %}"></script>
+<script src="{% static 'staticfiles1/js/main.js' %}"></script>
+</body>
+</html>
